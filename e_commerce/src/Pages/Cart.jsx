@@ -33,7 +33,19 @@ function Cart() {
           </ul>
           <h3>Total: ₹{totalPrice}</h3>
           <Link to="/products">Continue shopping</Link>
+          <Link to="/payment">
+  <button
+    style={{
+      padding: "10px 20px",
+      marginRight: "10px",
+      cursor: "pointer",
+    }}
+  >
+    Proceed to Checkout
+  </button>
+</Link>
         </>
+        
       )}
     </div>
   );
