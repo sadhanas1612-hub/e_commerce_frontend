@@ -1,18 +1,18 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Products from './pages/Products';
-import Cart from './pages/Cart';
-import Payment from "./Payment";
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import Products from './Pages/Products';
+import Cart from './Pages/Cart';
+import Payment from './Pages/Payment';
 function App() {
   return(
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Products" element={<Products />} />
-        <Route path="/Cart" element={<Cart />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>

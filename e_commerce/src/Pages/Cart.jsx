@@ -2,50 +2,204 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Cart() {
-  const [cartItems, setCartItems] = useState([]);
+
+  const [cartItems, setCartItems] =
+    useState([]);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCartItems(items);
+    loadCart();
   }, []);
 
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const loadCart = () => {
+    const items =
+      JSON.parse(localStorage.getItem("cart"))
+      || [];
+
+    setCartItems(items);
+  };
+
+  const increaseQuantity = (id) => {
+
+    const updatedCart = cartItems.map(
+      (item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
+          : item
+    );
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+
+    setCartItems(updatedCart);
+  };
+
+  const decreaseQuantity = (id) => {
+
+    const updatedCart = cartItems
+      .map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: item.quantity - 1,
+            }
+          : item
+      )
+      .filter((item) => item.quantity > 0);
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+
+    setCartItems(updatedCart);
+  };
+
+  const removeItem = (id) => {
+
+    const updatedCart =
+      cartItems.filter(
+        (item) => item.id !== id
+      );
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+
+    setCartItems(updatedCart);
+  };
+
+  const totalPrice = cartItems.reduce(
+    (sum, item) =>
+      sum + item.price * item.quantity,
+    0
+  );
 
   return (
-    <div style={{ padding: "24px", fontFamily: "Arial, sans-serif" }}>
-      <h2>Your Cart</h2>
+    <div className="container mt-4">
+
+      <h2 className="mb-4">
+        Shopping Cart
+      </h2>
+
       {cartItems.length === 0 ? (
-        <div>
-          <p>Your cart is empty.</p>
-          <Link to="/products">Browse products</Link>
-        </div>
+        <>
+          <h4>Cart is Empty</h4>
+
+          <Link
+            className="btn btn-primary"
+            to="/products"
+          >
+            Browse Products
+          </Link>
+        </>
       ) : (
         <>
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            {cartItems.map((item) => (
-              <li
-                key={item.id}
-                style={{ border: "1px solid #ddd", borderRadius: "10px", padding: "12px", marginBottom: "10px" }}
+          {cartItems.map((item) => (
+
+            <div
+              className="card mb-3"
+              key={item.id}
+            >
+              <div className="card-body">
+
+                <div className="row align-items-center">
+
+                  <div className="col-md-3">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="img-fluid"
+                    />
+                  </div>
+
+                  <div className="col-md-4">
+                    <h5>{item.name}</h5>
+
+                    <p>
+                      ₹{item.price}
+                    </p>
+                  </div>
+
+                  <div className="col-md-3">
+
+                    <button
+                      className="btn btn-danger me-2"
+                      onClick={() =>
+                        decreaseQuantity(
+                          item.id
+                        )
+                      }
+                    >
+                      -
+                    </button>
+
+                    {item.quantity}
+
+                    <button
+                      className="btn btn-success ms-2"
+                      onClick={() =>
+                        increaseQuantity(
+                          item.id
+                        )
+                      }
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                  <div className="col-md-2">
+
+                    <button
+                      className="btn btn-dark"
+                      onClick={() =>
+                        removeItem(item.id)
+                      }
+                    >
+                      Remove
+                    </button>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          ))}
+
+          <div className="card p-3 shadow">
+
+            <h3>
+              Total Amount :
+              ₹{totalPrice}
+            </h3>
+
+            <div className="mt-3">
+
+              <Link
+                to="/products"
+                className="btn btn-secondary me-2"
               >
-                <strong>{item.name}</strong> — ₹{item.price} × {item.quantity}
-              </li>
-            ))}
-          </ul>
-          <h3>Total: ₹{totalPrice}</h3>
-          <Link to="/products">Continue shopping</Link>
-          <Link to="/payment">
-  <button
-    style={{
-      padding: "10px 20px",
-      marginRight: "10px",
-      cursor: "pointer",
-    }}
-  >
-    Proceed to Checkout
-  </button>
-</Link>
+                Conti-ue Shopping
+              </Link>
+
+              <Link
+                to="/payment"
+                className="btn btn-success"
+              >
+                Proceed To Checkout
+              </Link>
+
+            </div>
+
+          </div>
         </>
-        
       )}
     </div>
   );
