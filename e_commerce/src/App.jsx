@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import Cart from './pages/Cart';
-import Payment from "./Payment";
+import Payment from './pages/Payment';
 function App() {
   return(
     <Router>
