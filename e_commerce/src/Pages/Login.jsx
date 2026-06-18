@@ -50,10 +50,10 @@ function Login() {
             <input type="text" id="address" placeholder="Enter address" />
             <br />
 
-           <button type="submit" className="btn btn-primary"
+        <button type="submit" className="btn btn-primary"
             onClick={loginExecution}>Login</button>
 
-                  <Link to="/">Already have an account? home</Link>
+                <Link to="/">Already have an account? home</Link>
         </div>
         </>
     )
