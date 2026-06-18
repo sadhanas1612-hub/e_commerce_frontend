@@ -186,14 +186,16 @@ function Cart() {
                 to="/products"
                 className="btn btn-secondary me-2"
               >
-                Conti-ue Shopping
+                Continue Shopping
               </Link>
+              <br></br>
+              <br></br>
 
               <Link
                 to="/payment"
                 className="btn btn-success"
               >
-                Proceed To Checkout
+                Proceed To PlaceOrder
               </Link>
 
             </div>

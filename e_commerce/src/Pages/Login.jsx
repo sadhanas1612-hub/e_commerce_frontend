@@ -31,6 +31,8 @@ function Login() {
         catch (error) {
             alert('unable to connect to the server');
         }
+        localStorage.setItem("isLoggedIn", "true");
+        navigate("/");
     }
 
     return (
