@@ -57,7 +57,7 @@ localStorage.setItem("cart", JSON.stringify(updatedCart));
 
 navigate("/cart");
 
-const isLoggedIn = localStorage.getItem("isLoggedIn");
+
 {
 !isLoggedIn && (
     <button onClick={() => navigate("/login")}>

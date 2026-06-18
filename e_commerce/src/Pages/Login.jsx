@@ -56,7 +56,7 @@ JSON.stringify(response.data)
         <button type="submit" className="btn btn-primary"
             onClick={loginExecution}>Login</button>
 
-                <Link to="/">Already have an account? home</Link>
+                <Link to="/Signup">Don't have an account? Signup</Link>
         </div>
         </>
     )
