@@ -33,6 +33,12 @@ function Login() {
         }
         localStorage.setItem("isLoggedIn", "true");
         navigate("/");
+
+        localStorage.setItem("isLoggedIn", "true");
+localStorage.setItem(
+"user",
+JSON.stringify(response.data)
+);
     }
 
     return (
@@ -45,11 +51,6 @@ function Login() {
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" placeholder="Enter password" />
             <br />
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" placeholder="Enter email" />
-            <br />
-            <label address htmlFor="address">Address:</label>
-            <input type="text" id="address" placeholder="Enter address" />
             <br />
 
         <button type="submit" className="btn btn-primary"

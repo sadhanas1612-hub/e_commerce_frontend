@@ -56,7 +56,24 @@ const updatedCart = existingItem
 localStorage.setItem("cart", JSON.stringify(updatedCart));
 
 navigate("/cart");
+
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+{
+!isLoggedIn && (
+    <button onClick={() => navigate("/login")}>
+    Login
+    </button>
+);
+}
 };
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+{
+!isLoggedIn && (
+    <button onClick={() => navigate("/login")}>
+    Login
+    </button>
+);
+}
 
 return (
     <div style={{ padding: "20px" }}>
